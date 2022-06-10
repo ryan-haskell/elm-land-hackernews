@@ -91,10 +91,6 @@ update msg model =
                     )
 
                 Err reason ->
-                    let
-                        _ =
-                            Debug.log "ERROR" reason
-                    in
                     ( model
                     , Cmd.none
                     )
@@ -107,10 +103,6 @@ update msg model =
                     )
 
                 Err reason ->
-                    let
-                        _ =
-                            Debug.log "ERROR" reason
-                    in
                     ( model
                     , Cmd.none
                     )
