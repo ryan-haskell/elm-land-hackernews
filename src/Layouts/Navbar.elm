@@ -19,8 +19,9 @@ viewNavbar : Html msg
 viewNavbar =
     div [ class "navbar" ]
         [ div [ class "navbar__container container" ]
-            [ div [ class "navbar__left" ]
-                [ a [ class "navbar__logo", href "/" ] [ text "HackerNews!" ]
+            [ div [ class "navbar__left row center-y" ]
+                [ a [ class "navbar__logo", href "/" ]
+                    [ text "HackerNews" ]
                 , a [ href "/" ] [ text "top" ]
                 ]
             ]

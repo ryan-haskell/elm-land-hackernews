@@ -1,9 +1,14 @@
-module Api.Comment exposing (Comment, fetch)
+module Api.Comment exposing (Comment, DeletableComment(..), fetch)
 
 import Http
 import Json.Decode as Json
 import Time
 import Utils.Time
+
+
+type DeletableComment
+    = NotDeleted Comment
+    | TotallyDeleted DeletedComment
 
 
 type alias Comment =
@@ -15,7 +20,16 @@ type alias Comment =
     }
 
 
-fetch : { id : String, onComplete : Result Http.Error Comment -> msg } -> Cmd msg
+type alias DeletedComment =
+    { id : Int
+    }
+
+
+fetch :
+    { id : String
+    , onComplete : Result Http.Error DeletableComment -> msg
+    }
+    -> Cmd msg
 fetch options =
     Http.get
         { url =
@@ -25,8 +39,16 @@ fetch options =
         }
 
 
-decoder : Json.Decoder Comment
+decoder : Json.Decoder DeletableComment
 decoder =
+    Json.oneOf
+        [ commentDecoder |> Json.map NotDeleted
+        , deletedCommentDecoder |> Json.map TotallyDeleted
+        ]
+
+
+commentDecoder : Json.Decoder Comment
+commentDecoder =
     Json.map5 Comment
         (Json.field "id" Json.int)
         (Json.field "text" Json.string)
@@ -39,3 +61,9 @@ decoder =
             , Json.succeed []
             ]
         )
+
+
+deletedCommentDecoder : Json.Decoder DeletedComment
+deletedCommentDecoder =
+    Json.map DeletedComment
+        (Json.field "id" Json.int)

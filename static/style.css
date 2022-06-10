@@ -128,3 +128,25 @@ a {
 .gap-8 { gap: 0.5rem; }
 .gap-16 { gap: 1rem; }
 .gap-32 { gap: 2rem; }
+
+.pad-y-32 { padding-top: 2rem; padding-bottom: 2rem; }
+.pad-y-64 { padding-top: 4rem; padding-bottom: 4rem; }
+
+
+/* COMMENTS */
+.comment {
+  padding-left: 1rem;
+  border-left: solid 3px mediumseagreen;
+}
+
+/* MARKDOWN */
+.markdown p {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  color: #555;
+}
+
+.markdown a {
+  text-decoration: underline;
+  color: navy;
+}
